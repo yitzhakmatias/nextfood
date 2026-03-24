@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { loginWithEmailPassword } from '@/app/_hex/auth/application/use-cases/loginWithEmailPassword';
 import { AUTH_ERROR_CODES } from '@/app/_hex/auth/domain/errors/authErrors';
@@ -32,6 +33,7 @@ function getUserMessage(errorCode) {
 }
 
 export function useLoginForm() {
+  const router = useRouter();
   const [fields, setFields] = useState(INITIAL_FIELDS);
   const [touched, setTouched] = useState(INITIAL_TOUCHED);
   const [fieldErrors, setFieldErrors] = useState({});
@@ -103,6 +105,10 @@ export function useLoginForm() {
       type: 'success',
       message: `Welcome back, ${result.data.user.name}! (Mock login success)`,
     });
+
+    document.cookie = 'auth_session=active; Path=/; Max-Age=604800; SameSite=Lax';
+    router.push('/');
+    router.refresh();
   }
 
   return {
