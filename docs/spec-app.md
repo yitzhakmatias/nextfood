@@ -1,4 +1,4 @@
-# Spec: App Login (Hexagonal, FE-Only)
+/# Spec: App Login (Hexagonal, FE-Only)
 
 ## Goal
 Implement a frontend-only login page in a Next.js App Router project using a hexagonal architecture that can switch to a real API with minimal changes.
